@@ -1,3 +1,5 @@
-<ul>
+<p *ngIf="cargando" >Cargando ...</p>
+
+<ul *ngIf="!cargando">
   <li *ngFor="let per of personaList" (click)="onRemovePerson(per)">{{ per }}</li>
 </ul>

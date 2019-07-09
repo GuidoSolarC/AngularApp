@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 
 export class PersonaComponent implements OnInit, OnDestroy {
     personaList: string[];
+    cargando = false;
     private personaListSubs: Subscription;
     // private personaService: PersonaService;
 
@@ -18,10 +19,12 @@ export class PersonaComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-      this.personaList = this.pService.persona;
       this.personaListSubs = this.pService.personasRefresh.subscribe(persona => {
           this.personaList = persona;
+          this.cargando = false;
       });
+      this.cargando = true;
+      this.pService.fetchPersona();
     }
 
     onRemovePerson(nombrePersona: string) {
